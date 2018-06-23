@@ -1,5 +1,10 @@
 export const FETCH_POSTS = 'FETCH_POSTS';
 export const ADD_POST = 'ADD_POST';
+export const ENTER_TITLE = 'ENTER_TITLE';
+
+export const enterTitle = (title) => dispatch => {
+    return dispatch({ type: ENTER_TITLE, payload: title });
+}
 
 export const fetchPosts = () => dispatch => {
     return fetch('https://jsonplaceholder.typicode.com/posts')

@@ -6,18 +6,13 @@ class Posts extends Component {
     constructor(props) {
         super(props);
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps) {
-            this.props.items.unshift(nextProps.newItem);
-        }
-    }
     componentWillMount() {
         this.props.fetchPosts();
     }
     render() {
         return (
             <div>
-                <h1>Posts</h1>
+                <h1>{this.props.title}</h1>
                 {JSON.stringify(this.props.item)}
                 {this.props.items.map(post => {
                     return <div key={post.id}>
@@ -33,7 +28,7 @@ class Posts extends Component {
 function mapStateToProps(state) {
     return {
         items: state.posts.items,
-        newItem: state.posts.item,
+        title: state.posts.title,
     };
 }
 

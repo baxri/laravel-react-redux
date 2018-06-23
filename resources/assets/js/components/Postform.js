@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost } from './actions/postActions';
+import { addPost, enterTitle } from './actions/postActions';
 
 class Postform extends Component {
     constructor(props) {
@@ -17,6 +17,7 @@ class Postform extends Component {
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
+        this.props.enterTitle(e.target.value);
     }
 
     onSubmit(e) {
@@ -37,7 +38,7 @@ class Postform extends Component {
                 <form>
                     <div>
                         <label>Title:</label><br />
-                        <input type="text" name="title" onChange={this.onChange} />
+                        <input type="text" name="title" onChange={this.onChange} /> <p>{this.props.title}</p>
                     </div>
                     <div>
                         <label>Body:</label><br />
@@ -50,4 +51,10 @@ class Postform extends Component {
     }
 };
 
-export default connect(null, { addPost })(Postform)
+function mapStateToProps(state) {
+    return {
+        title: state.posts.title,
+    };
+}
+
+export default connect(mapStateToProps, { addPost, enterTitle })(Postform)
